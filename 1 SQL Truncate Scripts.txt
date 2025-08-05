@@ -1,0 +1,10 @@
+TRUNCATE TABLE febmar25m.Returns;
+TRUNCATE TABLE febmar25m.ShippingDetails;
+TRUNCATE TABLE febmar25m.Reviews;
+TRUNCATE TABLE febmar25m.Payments;
+TRUNCATE TABLE febmar25m.OrderItems;
+TRUNCATE TABLE febmar25m.Orders;
+TRUNCATE TABLE febmar25m.Inventory;
+TRUNCATE TABLE febmar25m.Products;
+TRUNCATE TABLE febmar25m.Promotions;
+TRUNCATE TABLE febmar25m.Customers;
