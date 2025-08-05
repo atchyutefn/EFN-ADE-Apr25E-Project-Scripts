@@ -1,0 +1,69 @@
+create table ADFLogs
+(
+	id int identity(1,1),
+	ADFName varchar(30),
+	PipelineName varchar(30),
+	RunID varchar(30),
+	StartTime datetime,
+	EndTime datetime,
+	ErrorMessage varchar(500),
+	parentid int
+)
+
+
+
+--**************************************************************************************************************
+
+CREATE procedure [febmar25m].[uspADFLogsStartingHierarchy] 
+			@p_ADFName varchar(30),
+			@p_PipeLineName varchar(30),
+			@p_RunID varchar(30),
+			@p_StartTime datetime,
+			@pid int 
+AS 
+Begin
+		
+		
+
+		insert into febmar25m.ADFLogsHierchy(	Adfname,
+										PipelineName,
+										runid,
+										starttime,
+										pid
+									  )
+							values(		@p_ADFName,
+										@p_PipeLineName,
+										@p_RunID,
+										@p_StartTime,  -- getdate()
+										@pid 
+									)
+
+		select scope_identity() as id;
+
+End
+
+
+--**************************************************************************************************************
+
+CREATE procedure [febmar25m].[uspADFLogsEndingHierarchy] 
+			@id int,
+			@status varchar(10),
+			@endtime datetime,
+			@errorMessage varchar(max)	
+as 
+BEgin
+		update febmar25m.ADFLogsHierchy
+		set Status=@status,
+			EndTime=@endtime,
+			errorMessage=@errorMessage
+		where id=@id;
+End
+
+
+
+
+
+
+
+
+

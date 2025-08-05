@@ -1,0 +1,75 @@
+CREATE PROCEDURE [febmar25m].[usp_Prepare_ADF_Email_HTML]
+    @ADFName NVARCHAR(100),
+    @PipelineName NVARCHAR(100),
+    @RunId NVARCHAR(100),
+    @Status NVARCHAR(50),
+    @StartTime DATETIME,
+    @EndTime DATETIME
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DECLARE @StatusColor NVARCHAR(10);
+    DECLARE @EmailBody NVARCHAR(MAX);
+    DECLARE @EmailSubject NVARCHAR(200);
+
+    -- Determine color and subject based on status
+    IF UPPER(@Status) = 'SUCCEEDED'
+    BEGIN
+        SET @StatusColor = 'green';
+        SET @EmailSubject = N'✅ ADF Pipeline Succeeded - ' + @PipelineName;
+    END
+    ELSE
+    BEGIN
+        SET @StatusColor = 'red';
+        SET @EmailSubject = N'❌ ADF Pipeline Failed - ' + @PipelineName;
+    END
+
+    -- Prepare HTML body
+    SET @EmailBody = '
+    <html>
+    <head>
+        <style>
+            table {
+                font-family: Arial, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+            }
+            th, td {
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+            }
+            th {
+                background-color: #f2f2f2;
+            }
+        </style>
+    </head>
+    <body>
+        <h3>ADF Pipeline Execution Summary</h3>
+        <table>
+            <tr>
+                <th>ADF Name</th>
+                <th>Pipeline Name</th>
+                <th>Run ID</th>
+                <th>Status</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+            </tr>
+            <tr>
+                <td>' + @ADFName + '</td>
+                <td>' + @PipelineName + '</td>
+                <td>' + @RunId + '</td>
+                <td><span style="color:' + @StatusColor + '"><strong>' + @Status + '</strong></span></td>
+                <td>' + CONVERT(NVARCHAR(20), @StartTime, 120) + '</td>
+                <td>' + CONVERT(NVARCHAR(20), @EndTime, 120) + '</td>
+            </tr>
+        </table>
+    </body>
+    </html>';
+
+    -- Return both subject and body
+    SELECT 
+        @EmailSubject AS emailsubject,
+        @EmailBody AS emailbody;
+END

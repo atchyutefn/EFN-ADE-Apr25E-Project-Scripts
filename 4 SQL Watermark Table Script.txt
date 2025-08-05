@@ -1,0 +1,15 @@
+Azure SQL Server table creation :
+create table watermarktable
+(
+	id int,
+	tablename varchar(30),
+	watermarkDateTime datetime
+)
+
+-- Write insert statement for all incremental tables as follows
+insert into watermarktable values(1,'Orders',dateadd(day,-60,getdate()))
+insert into watermarktable values(2,'OrderItems',dateadd(day,-60,getdate()))
+insert into watermarktable values(3,'Inventory',dateadd(day,-60,getdate()))
+insert into watermarktable values(4,'Payments',dateadd(day,-60,getdate()))
+
+
