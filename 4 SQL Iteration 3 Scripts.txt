@@ -1,0 +1,95 @@
+***************************************************************************
+---4. On-Prems : Incremental load 2 - insert scripts for all tables.-------
+***************************************************************************
+-- Add febmar25m schema to every table
+***************************************************************************
+
+-- Customers Table
+INSERT INTO Customers (CustomerID, FirstName, LastName, Email, Phone)
+VALUES 
+(11, 'Sunita', 'Chopra', 'sunita.c@example.com', '111-222-3333'),
+(12, 'Alok', 'Shah', 'alok.sh@example.com', '222-333-4444'),
+(13, 'Deepak', 'Mishra', 'deepak.m@example.com', '333-444-5555'),
+(14, 'Kavita', 'Nair', 'kavita.n@example.com', '444-555-6666'),
+(15, 'Vivek', 'Gupta', 'vivek.g@example.com', '555-666-7777');
+
+-- Products Table
+INSERT INTO Products (ProductID, ProductName, Price, Category)
+VALUES 
+(11, 'Smart Watch', 200.00, 'Electronics'),
+(12, 'Wireless Earbuds', 80.00, 'Electronics'),
+(13, 'Sunglasses', 50.00, 'Accessories'),
+(14, 'Sweater', 35.00, 'Clothing'),
+(15, 'Dress', 60.00, 'Clothing');
+
+-- Orders Table
+INSERT INTO Orders (OrderID, CustomerID, OrderDate, OrderStatus)
+VALUES 
+(11, 11, '2024-03-10 08:00:00', 'Delivered'),
+(12, 12, '2024-03-09 09:30:00', 'Shipped'),
+(13, 13, '2024-03-08 11:45:00', 'Pending'),
+(14, 14, '2024-03-07 14:20:00', 'Cancelled'),
+(15, 15, '2024-03-06 16:15:00', 'Processing');
+
+-- OrderItems Table
+INSERT INTO OrderItems (OrderItemID, OrderID, ProductID, Quantity, TotalPrice)
+VALUES 
+(11, 11, 11, 1, 200.00),
+(12, 12, 12, 1, 80.00),
+(13, 13, 13, 2, 100.00),
+(14, 14, 14, 3, 105.00),
+(15, 15, 15, 1, 60.00);
+
+-- Inventory Table
+INSERT INTO Inventory (ProductID, StockQuantity)
+VALUES 
+(11, 150),
+(12, 200),
+(13, 100),
+(14, 300),
+(15, 150);
+
+-- Payments Table
+INSERT INTO Payments (PaymentID, OrderID, PaymentAmount, PaymentDate)
+VALUES 
+(11, 11, 200.00, '2024-03-10 08:05:00'),
+(12, 12, 80.00, '2024-03-09 09:35:00'),
+(13, 13, 100.00, '2024-03-08 11:50:00'),
+(14, 14, 105.00, '2024-03-07 14:25:00'),
+(15, 15, 60.00, '2024-03-06 16:20:00');
+
+-- Reviews Table
+INSERT INTO Reviews (ReviewID, ProductID, CustomerID, Rating, Comment)
+VALUES 
+(11, 11, 11, 4, 'Nice smartwatch, good features.'),
+(12, 12, 12, 5, 'Excellent earbuds, great sound quality!'),
+(13, 13, 13, 3, 'Average sunglasses, could be sturdier.'),
+(14, 14, 14, 4, 'Comfortable sweater, good fit.'),
+(15, 15, 15, 5, 'Love this dress, elegant and stylish.');
+
+-- Promotions Table
+INSERT INTO Promotions (PromotionID, PromotionName, Discount, StartDate, EndDate)
+VALUES 
+(11, 'Valentine\'s Day Sale', 20.00, '2024-02-01', '2024-02-14'),
+(12, 'Mother\'s Day Special', 25.00, '2024-05-01', '2024-05-10'),
+(13, 'Father\'s Day Deals', 15.00, '2024-06-01', '2024-06-21'),
+(14, 'Independence Day Sale', 30.00, '2024-08-01', '2024-08-15'),
+(15, 'Labor Day Clearance', 40.00, '2024-09-01', '2024-09-07');
+
+-- ShippingDetails Table
+INSERT INTO ShippingDetails (ShippingID, OrderID, ShippingMethod, TrackingNumber, ShipDate)
+VALUES 
+(11, 11, 'Express', 'TRK111222333', '2024-03-10 08:10:00'),
+(12, 12, 'Standard', 'TRK222333444', '2024-03-09 09:40:00'),
+(13, 13, 'Express', 'TRK333444555', '2024-03-08 11:55:00'),
+(14, 14, 'Standard', 'TRK444555666', '2024-03-07 14:30:00'),
+(15, 15, 'Express', 'TRK555666777', '2024-03-06 16:25:00');
+
+-- Returns Table
+INSERT INTO Returns (ReturnID, OrderID, ProductID, ReturnReason, ReturnDate)
+VALUES 
+(11, 12, 12, 'Defective product', '2024-03-11 11:00:00'),
+(12, 13, 13, 'Wrong item received', '2024-03-10 12:30:00'),
+(13, 14, 14, 'Size too small', '2024-03-09 13:45:00'),
+(14, 15, 15, 'Changed mind', '2024-03-08 14:20:00'),
+(15, 11, 11, 'Not as described', '2024-03-07 15:00:00');
