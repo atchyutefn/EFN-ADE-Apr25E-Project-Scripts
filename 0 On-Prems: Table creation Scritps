@@ -1,0 +1,106 @@
+***************************************************************************
+------------1. On-Prems : Tables creation scripts--------------------------
+***************************************************************************
+-- Customers Table
+CREATE TABLE Customers (
+    CustomerID INT PRIMARY KEY,
+    FirstName VARCHAR(50),
+    LastName VARCHAR(50),
+    Email VARCHAR(100),
+    Phone VARCHAR(20),
+    CreatedDate DATETIME DEFAULT GETDATE(),
+    ModifiedDate DATETIME DEFAULT GETDATE()
+);
+
+-- Products Table
+CREATE TABLE Products (
+    ProductID INT PRIMARY KEY,
+    ProductName VARCHAR(100),
+    Price DECIMAL(10, 2),
+    Category VARCHAR(50),
+    CreatedDate DATETIME DEFAULT GETDATE(),
+    ModifiedDate DATETIME DEFAULT GETDATE()
+);
+
+-- Orders Table
+CREATE TABLE Orders (
+    OrderID INT PRIMARY KEY,
+    CustomerID INT,
+    OrderDate DATETIME,
+    OrderStatus VARCHAR(20),
+    CreatedDate DATETIME DEFAULT GETDATE(),
+    ModifiedDate DATETIME DEFAULT GETDATE()
+);
+
+-- OrderItems Table
+CREATE TABLE OrderItems (
+    OrderItemID INT PRIMARY KEY,
+    OrderID INT,
+    ProductID INT,
+    Quantity INT,
+    TotalPrice DECIMAL(10, 2),
+    CreatedDate DATETIME DEFAULT GETDATE(),
+    ModifiedDate DATETIME DEFAULT GETDATE()
+);
+
+-- Inventory Table
+CREATE TABLE Inventory (
+    ProductID INT PRIMARY KEY,
+    StockQuantity INT,
+    CreatedDate DATETIME DEFAULT GETDATE(),
+    ModifiedDate DATETIME DEFAULT GETDATE()
+);
+
+-- Payments Table
+CREATE TABLE Payments (
+    PaymentID INT PRIMARY KEY,
+    OrderID INT,
+    PaymentAmount DECIMAL(10, 2),
+    PaymentDate DATETIME,
+    CreatedDate DATETIME DEFAULT GETDATE(),
+    ModifiedDate DATETIME DEFAULT GETDATE()
+);
+
+-- Reviews Table
+CREATE TABLE Reviews (
+    ReviewID INT PRIMARY KEY,
+    ProductID INT,
+    CustomerID INT,
+    Rating INT,
+    Comment TEXT,
+    CreatedDate DATETIME DEFAULT GETDATE(),
+    ModifiedDate DATETIME DEFAULT GETDATE()
+);
+
+-- Promotions Table
+CREATE TABLE Promotions (
+    PromotionID INT PRIMARY KEY,
+    PromotionName VARCHAR(50),
+    Discount DECIMAL(5, 2),
+    StartDate DATETIME,
+    EndDate DATETIME,
+    CreatedDate DATETIME DEFAULT GETDATE(),
+    ModifiedDate DATETIME DEFAULT GETDATE()
+);
+
+-- ShippingDetails Table
+CREATE TABLE ShippingDetails (
+    ShippingID INT PRIMARY KEY,
+    OrderID INT,
+    ShippingMethod VARCHAR(50),
+    TrackingNumber VARCHAR(20),
+    ShipDate DATETIME,
+    CreatedDate DATETIME DEFAULT GETDATE(),
+    ModifiedDate DATETIME DEFAULT GETDATE()
+);
+
+-- Returns Table
+CREATE TABLE Returns (
+    ReturnID INT PRIMARY KEY,
+    OrderID INT,
+    ProductID INT,
+    ReturnReason VARCHAR(100),
+    ReturnDate DATETIME,
+    CreatedDate DATETIME DEFAULT GETDATE(),
+    ModifiedDate DATETIME DEFAULT GETDATE()
+);
