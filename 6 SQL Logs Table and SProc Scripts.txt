@@ -14,7 +14,7 @@ create table ADFLogs
 
 --**************************************************************************************************************
 
-CREATE procedure [febmar25m].[uspADFLogsStartingHierarchy] 
+CREATE procedure [dwh].[uspADFLogsStartingHierarchy] 
 			@p_ADFName varchar(30),
 			@p_PipeLineName varchar(30),
 			@p_RunID varchar(30),
@@ -45,7 +45,7 @@ End
 
 --**************************************************************************************************************
 
-CREATE procedure [febmar25m].[uspADFLogsEndingHierarchy] 
+CREATE procedure [dwh].[uspADFLogsEndingHierarchy] 
 			@id int,
 			@status varchar(10),
 			@endtime datetime,
